@@ -189,12 +189,12 @@ app.add_middleware(
 # https://www.slideshare.net/slideshow/2doc-258758272/258758272 329 slides pptx
 
 
-@app.get("/api/slidesharedl/ping")
+@app.get("/ping")
 async def pingpong():
     return "pong"
 
 
-@app.get("/api/slidesharedl/download/{slideshare_url}")
+@app.get("/download/{slideshare_url}")
 async def download(slideshare_url: str, request: Request):
     try:
         client_ip = request.client.host
@@ -257,7 +257,7 @@ def get_slideshare_info(url):
     }
 
 
-@app.get("/api/slidesharedl/info/{slideshare_url}")
+@app.get("/info/{slideshare_url}")
 async def info(slideshare_url: str, request: Request):
     try:
         client_ip = request.client.host
@@ -272,7 +272,7 @@ async def info(slideshare_url: str, request: Request):
 
 
 # WIP
-@app.get("/api/slidesharedl/get_slide/{slideshare_url}/{slide_number}")
+@app.get("/get_slide/{slideshare_url}/{slide_number}")
 async def get_slide(slideshare_url: str, slide_number: int, request: Request):
     try:
         decoded_url = requests.utils.unquote(decode_b64(slideshare_url))
