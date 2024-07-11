@@ -131,8 +131,6 @@ def split_list_in_chunks(mylist: list, chunks_n: int):
 
 
 def get_all_slides_images(url):
-    # url = "https://www.slideshare.net/gheorghio/la-seconda-guerra-mondiale-12879913"
-
     page_source = requests.get(url).text
     soup = bs4.BeautifulSoup(page_source, "html.parser")
 
@@ -185,7 +183,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# get_all_slides_images("https://www.slideshare.net/Psicologi-A-Lavoro/slide-hikikomori")
 # https://www.slideshare.net/slideshow/2doc-258758272/258758272 329 slides pptx
 
 
@@ -224,14 +221,6 @@ async def download(slideshare_url: str, request: Request):
         presentation_bytes = io.BytesIO()
         prs.save(presentation_bytes)
         presentation_bytes.seek(0)
-
-        # def iterfile():
-        #    yield from presentation_bytes
-        # return StreamingResponse(
-        #    iterfile(),
-        #    media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation",
-        #    headers={"Access-Control-Allow-Origin": "*"},
-        # )
 
         return Response(
             content=presentation_bytes.read(),
